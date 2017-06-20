@@ -1,0 +1,43 @@
+package com.itheima.swipedelete100;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.FrameLayout;
+
+/**
+ * Created by dance on 2017/5/17.
+ */
+
+public class SwipeLayout extends FrameLayout {
+
+    private View content;
+    private View delete;
+
+    public SwipeLayout(Context context) {
+        this(context, null);
+    }
+
+    public SwipeLayout(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public SwipeLayout(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        content = getChildAt(0);
+        delete = getChildAt(1);
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+//        super.onLayout(changed, left, top, right, bottom);
+        content.layout(0, 0, content.getMeasuredWidth(), content.getMeasuredHeight());
+        int delLeft = content.getMeasuredWidth();
+        delete.layout(delLeft, 0, delLeft+delete.getMeasuredWidth(), delete.getMeasuredHeight());
+    }
+}
